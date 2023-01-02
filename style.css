@@ -42,6 +42,10 @@ body {
   border-radius: 10px;
 }
 
+.cell {
+  background-color: white;
+}
+
 .btn,
 .btn:link,
 .btn:visited {
