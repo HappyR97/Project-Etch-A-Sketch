@@ -1,12 +1,15 @@
 const grid = document.querySelector(".grid-container");
+const gridSizeText = document.querySelector(".grid-size");
 const btnColor = document.querySelector(".btn--color");
 const btnRandom = document.querySelector(".btn--random");
 const btnClear = document.querySelector(".btn--clear");
 const btnSize = document.querySelector(".btn--size");
+const colorPicker = document.querySelector(".color-picker");
 
-let cellSize = 16;
-let color = "red";
+let cellSize = 32;
+let color = colorPicker.value;
 let cell = [];
+let rainbowMode = false;
 
 // Function that adds cells in the grid
 function createCells(cellSize) {
@@ -18,7 +21,12 @@ function createCells(cellSize) {
     grid.appendChild(cell[i]);
 
     cell[i].addEventListener("mouseover", function () {
-      cell[i].style.backgroundColor = `${color}`;
+      if (rainbowMode === true) {
+        color = randomColor(0, 255);
+        cell[i].style.backgroundColor = `${color}`;
+      } else if (rainbowMode === false) {
+        cell[i].style.backgroundColor = `${color}`;
+      }
     });
   }
 }
@@ -37,14 +45,27 @@ function removeCells(cellSize) {
   }
 }
 
+// Function that gets a random RBG color
+function randomColor(x, y) {
+  function randomNumber(x, y) {
+    return x + Math.floor(Math.random() * (y - x + 1));
+  }
+  let randomNumber1 = randomNumber(0, 255);
+  let randomNumber2 = randomNumber(0, 255);
+  let randomNumber3 = randomNumber(0, 255);
+
+  return `rgb(${randomNumber1},${randomNumber2},${randomNumber3})`;
+}
+
 createCells(cellSize);
+gridSizeText.textContent = `${cellSize} x ${cellSize}`;
 
 btnClear.addEventListener("click", function () {
   clearCells(cellSize);
 });
 
 btnSize.addEventListener("click", function () {
-  let size = Number(prompt("Choose cell size (from 1 to 100)"));
+  let size = Number(prompt("Choose grid size (1 - 100)"));
   console.log(size);
   if (size < 1 || size > 100 || size !== size) {
     alert("You did not choose a valid option");
@@ -52,11 +73,23 @@ btnSize.addEventListener("click", function () {
     clearCells(cellSize);
     removeCells(cellSize);
     cellSize = size;
+    gridSizeText.textContent = `${cellSize} x ${cellSize}`;
     createCells(cellSize);
   }
 });
 
-console.log(cellSize);
+btnRandom.addEventListener("click", function () {
+  if (rainbowMode === false) {
+    rainbowMode = true;
+    color = colorPicker.value;
+    btnRandom.textContent = `Random RGB Mode:ON`;
+  } else if (rainbowMode === true) {
+    rainbowMode = false;
+    color = colorPicker.value;
+    btnRandom.textContent = `Random RGB Mode:OFF`;
+  }
+});
 
-//  grid-template-columns: repeat(cellSize, 1fr);
-//  grid-template-rows: repeat(cellSize, 1fr);
+colorPicker.addEventListener("input", function () {
+  color = colorPicker.value;
+});

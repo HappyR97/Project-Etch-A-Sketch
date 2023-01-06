@@ -15,12 +15,16 @@
     <title>Etch a sketch</title>
   </head>
   <body>
-    <h1 class="title">ETCH A SKETCH</h1>
+    <h1 class="title">ETCH &ThinSpace; A &ThinSpace; SKETCH</h1>
+    <h2 class="grid-size"></h2>
     <div class="grid-container">
       <div class="settings">
         <button class="btn btn--size">Change Size</button>
-        <button class="btn btn--color">Select color</button>
-        <button class="btn btn--random">Random RGB Mode</button>
+        <button class="btn btn--color">
+          Select a color:
+          <input class="color-picker" type="color" value="#ff0000" />
+        </button>
+        <button class="btn btn--random">Random RGB Mode: OFF</button>
         <button class="btn btn--clear">Clear</button>
       </div>
     </div>
