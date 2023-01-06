@@ -82,11 +82,11 @@ btnRandom.addEventListener("click", function () {
   if (rainbowMode === false) {
     rainbowMode = true;
     color = colorPicker.value;
-    btnRandom.textContent = `Random RGB Mode:ON`;
+    btnRandom.textContent = `Rainbow Mode:ON`;
   } else if (rainbowMode === true) {
     rainbowMode = false;
     color = colorPicker.value;
-    btnRandom.textContent = `Random RGB Mode:OFF`;
+    btnRandom.textContent = `Rainbow Mode:OFF`;
   }
 });
 
